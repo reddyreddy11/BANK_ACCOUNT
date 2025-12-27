@@ -1,4 +1,4 @@
-{{ config(materialized='table') }}
+{{ config(materialized='table') }
 
 select
 Account_id,
@@ -31,4 +31,5 @@ Account_id,
     current_timestamp() as load_ts   -- <--- Make sure alias exists
 
 from {{ source('putty','ACCOUNT') }}
+
 where balance > 0

@@ -1,4 +1,4 @@
-{{ config(materialized='table') }
+{{ config(materialized='table') }}
 
 select
 Account_id,
@@ -33,3 +33,4 @@ Account_id,
 from {{ source('putty','ACCOUNT') }}
 
 where balance > 0
+

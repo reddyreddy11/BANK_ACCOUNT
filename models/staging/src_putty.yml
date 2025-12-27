@@ -1,0 +1,20 @@
+version: 2
+
+sources:
+  - name: putty
+    database: SNOWFLAKE_DB_AIR
+    schema: PUTTY
+    description: "Source data from PUTTY schema in Snowflake"
+
+    tables:
+      - name: ACCOUNT
+        description: "Account table"
+        columns:
+          - name: ACCOUNT_NAME
+            description: "Name of the account"
+
+          - name: ACCOUNT_TYPE
+            description: "Type of the account"
+
+          - name: BALANCE
+            description: "Account balance"

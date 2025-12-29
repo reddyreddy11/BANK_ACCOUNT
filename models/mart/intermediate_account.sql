@@ -1,24 +1,24 @@
 {{
   config(
     materialized='incremental',
-    unique_key='Account_id',
-    incremental_strategy='append'
+    unique_key='ACCOUNT_ID',
+    incremental_strategy='merge',
+    on_schema_change='sync_all_columns'
   )
 }}
 
 select
-Account_id,
-    upper(trim(account_name)) as account_name,
-    account_type,
-    balance,
-    balance_end,
-    account_status,
-    zero_balance,
-    load_ts
-from {{ ref('stg_account') }}
+    ACCOUNT_ID,
+    upper(trim(ACCOUNT_NAME)) as account_name,
+    ACCOUNT_TYPE,
+    BALANCE,
+    BALANCE_END,
+    ACCOUNT_STATUS,
+    ZERO_BALANCE,
+    LOAD_TS
 from {{ ref('stg_account') }}
 {% if is_incremental() %}
-where load_ts >= coalesce((select max(load_ts) from {{ this }}), '1900-01-01')
+where LOAD_TS > (select max(LOAD_TS) from {{ this }})
 {% endif %}
 
 

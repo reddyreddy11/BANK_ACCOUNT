@@ -48,3 +48,13 @@ models:
     # Applies to all files under models/marts/
     staging:
       +materialized: table
+    cdc:
+      +materialized: table
+      # Seed configuration
+seeds:
+  my_dbt_project:       # Replace with your project name
+    countries:
+      file: data/countries.csv
+      header: true
+      delimiter: ','
+      quote: 
